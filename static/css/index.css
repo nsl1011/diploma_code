@@ -1,0 +1,36 @@
+img {
+    width: 500px;
+}
+
+.block_article {
+    /*border: solid blue;*/
+    width: 1000px;
+    margin: 20px auto;
+}
+
+.name_article {
+    font-size: 150%;
+    text-align: center;
+}
+
+.line {
+    border-bottom: 2px solid #000;
+    margin: 10px auto;
+}
+
+.block_content {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    justify-items: center;
+    text-align: center;
+}
+
+.content {
+    font-size: 200%;
+    margin: auto;
+}
+
+.text_article {
+    text-align: justify;
+}

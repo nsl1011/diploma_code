@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/munfunction_base.css') }}">
+    {% block link %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#">
+                Petrend
+            </a>
+        </header>
+        <div class="block_main_buttons">
+            <div class="button_hinged">
+                <a href="#">
+                Навесное оборудование
+                </a>
+            </div>
+            <div class="button_engine">
+                <a href="#">
+                Двигатель
+                </a>
+            </div>
+        </div>
+        {% block body %}{% endblock %}
+        <footer>
+            <label>
+                Petrend
+            </label>
+        </footer>
+    </div>
+</body>
+</html>

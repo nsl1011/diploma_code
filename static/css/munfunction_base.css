@@ -1,0 +1,17 @@
+.block_other_buttons {
+    margin: 30px auto;
+    padding: 1em;
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat(3, 33%);
+    justify-items: center;
+}
+
+.other_buttons {
+    font-size: 200%;
+}
+
+.munfunction_label {
+    font-size: 150%;
+    color: rgba(0,0,0,0.5)
+}

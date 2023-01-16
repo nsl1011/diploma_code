@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="block_other_buttons">
+    <div class="other_buttons">
+        <a href="#">
+            Рекомендации
+        </a>
+    </div>
+    <div class="munfunction_label">
+        Неисправность
+    </div>
+    <div class="other_buttons">
+        <a href="#">
+            Последствия
+        </a>
+    </div>
+</div>
+<div class="block_description_munfunction">
+    {% block name_munfunction_description %}{% endblock %}
+    <div class="line"></div>
+    {% block description %}{% endblock %}
+    <div class="line"></div>
+</div>
+{% endblock %}
