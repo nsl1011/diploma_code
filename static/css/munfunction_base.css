@@ -1,5 +1,4 @@
 .block_other_buttons {
-    margin: 30px auto;
     padding: 1em;
     display: grid;
     width: auto;
@@ -8,10 +7,41 @@
 }
 
 .other_buttons {
-    font-size: 200%;
+    font-size: 150%;
+}
+
+.other_buttons_animation {
+    border: 1px solid black;
+    border-radius: 40px;
+    padding: 10px 30px;
+    transition: 0.3s;
+}
+
+.other_buttons_animation:hover {
+    border: 1px solid gray;
+    color: gray;
 }
 
 .munfunction_label {
     font-size: 150%;
     color: rgba(0,0,0,0.5)
+}
+
+.block_munfunction {
+    width: 1000px;
+    margin: 30px auto;
+}
+
+.munfunction_name {
+    font-size: 150%;
+    text-align: center;
+}
+
+.line {
+    border-bottom: 2px solid #000;
+    margin: 10px auto;
+}
+
+.munfunction_description {
+    text-align: justify;
 }

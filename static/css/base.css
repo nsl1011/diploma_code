@@ -4,7 +4,7 @@
 }
 
 html {
-    /*background-color: #EAEEED;*/
+    background-color: #EAEEED;
 }
 
 a {
@@ -13,39 +13,90 @@ a {
 }
 
 header {
-    padding: 30px 0px;
+    padding: 50px 0px;
     text-align: center;
     font-size: 250%;
-    /*border: solid red;*/
 }
 
 footer {
-    padding: 30px 100px;
+    margin-top: 100px;
+    padding: 50px 50px;
+    border: solid black;
+    background-color: black;
+    color: #EAEEED;
     text-align: left;
-    font-size: 250%;
-    /*border: solid red;*/
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
 }
 
 .container {
-    font-family: 'Courier New', Courier, monospace;
-    /*border: solid red;*/
+    font-family: 'Courier new';
+}
+
+.header_style {
+    border: solid black;
+    display: inline-block;
+    margin-left: -20px;
+    margin-right: -20px;
+    background-color: black;
+    color: #EAEEED;
+}
+
+.header_line {
+    border-bottom: 2px solid black;
 }
 
 .block_main_buttons {
-    padding: 1em;
+    margin-bottom: 100px;
+    padding: 20px;
     display: grid;
     width: auto;
     grid-template-columns: repeat(2, 50%);
     justify-items: center;
     font-size: 200%;
-    /*border: solid red;*/
 }
 
-.button_hinged {
-    /*border: solid red;*/
+.block_main_buttons_link {
+    position: relative;
 }
 
-.button_engine {
-    /*border: solid red;*/
+.block_main_buttons_link:hover {
+    color: black;
 }
 
+.block_main_buttons_link:hover:before {
+    transform: scaleX(1);
+    transition: transform 0.3s;
+    transform-origin: left;
+}
+
+.block_main_buttons_link:before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: right;
+}
+
+.block_label {
+    font-size: 250%;
+}
+
+.label {
+    border: solid #EAEEED;
+    display: inline-block;
+    margin-left: -20px;
+    margin-right: -20px;
+    background-color: #EAEEED;
+    color: black;
+}
+
+.email  {
+    text-align: right;
+    font-size: 150%;
+}

@@ -3,23 +3,27 @@
 {% block body %}
 <div class="block_other_buttons">
     <div class="other_buttons">
-        <a href="#">
+        <a href="#" class="other_buttons_animation">
             Рекомендации
         </a>
     </div>
-    <div class="munfunction_label">
+    <label class="munfunction_label">
         Неисправность
-    </div>
+    </label>
     <div class="other_buttons">
-        <a href="#">
+        <a href="#" class="other_buttons_animation">
             Последствия
         </a>
     </div>
 </div>
-<div class="block_description_munfunction">
-    {% block name_munfunction_description %}{% endblock %}
+<div class="block_munfunction">
+    <div class="munfunction_name">
+        {% block munfunction_name %}{% endblock %}
+    </div>
     <div class="line"></div>
-    {% block description %}{% endblock %}
+    <div class="munfunction_description">
+        {% block munfunction_description %}{% endblock %}
+    </div>
     <div class="line"></div>
 </div>
 {% endblock %}

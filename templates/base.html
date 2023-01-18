@@ -11,27 +11,39 @@
 <body>
     <div class="container">
         <header>
-            <a href="#">
-                Petrend
+            <a href="/">
+                Petr
+                <div class="header_style">
+                    en
+                </div>
+                d
             </a>
+            <div class="header_line"></div>
         </header>
         <div class="block_main_buttons">
-            <div class="button_hinged">
-                <a href="#">
+            <a href="#" class="block_main_buttons_link">
                 Навесное оборудование
-                </a>
-            </div>
-            <div class="button_engine">
-                <a href="#">
+            </a>
+            <a href="#" class="block_main_buttons_link">
                 Двигатель
-                </a>
-            </div>
+            </a>
         </div>
         {% block body %}{% endblock %}
         <footer>
-            <label>
-                Petrend
-            </label>
+            <div class="block_label">
+                <label>
+                    Petr
+                </label>
+                <label class="label">
+                    en
+                </label>
+                <label>
+                    d
+                </label>
+            </div>
+            <div class="email">
+                E-Mail:<br />helpmail@mail.ru
+            </div>
         </footer>
     </div>
 </body>
