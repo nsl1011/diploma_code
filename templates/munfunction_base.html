@@ -7,9 +7,9 @@
             Рекомендации
         </a>
     </div>
-    <label class="munfunction_label">
+    <div class="munfunction_label">
         Неисправность
-    </label>
+    </div>
     <div class="other_buttons">
         <a href="#" class="other_buttons_animation">
             Последствия
@@ -17,13 +17,54 @@
     </div>
 </div>
 <div class="block_munfunction">
-    <div class="munfunction_name">
-        {% block munfunction_name %}{% endblock %}
+    <div class="munfunction_head">
+        <button class="button_favorite">
+            <div class="flag_favorite"></div>
+        </button>
+        <div class="munfunction_name">
+            {% block munfunction_name %}{% endblock %}
+        </div>
+        <button class="button_mark">
+            <div class="flag_mark"></div>
+        </button>
     </div>
     <div class="line"></div>
     <div class="munfunction_description">
         {% block munfunction_description %}{% endblock %}
     </div>
     <div class="line"></div>
+</div>
+<div class="block_comment">
+    <div class="block_comment_send">
+        <textarea type="text" placeholder="Оставьте комментарий..." class="comment_send_text"></textarea>
+        <br>
+        <button class="comment_send_button">Отправить</button>
+    </div>
+</div>
+<div class="block_comment_info">
+    <div class="comment_name">
+        Комментарии
+    </div>
+    <div class="comment_number">
+        2
+    </div>
+</div>
+<div class="block_user_comment">
+    <div class="user_info">
+        {% block user_photo %}{% endblock %}
+        <div class="user_name">
+            {% block user_name %}{% endblock %}
+        <br>
+        <div class="user_date">
+            Опубликовано {% block user_date %}{% endblock %}
+        </div>
+        </div>
+    </div>
+    <div class="user_comment">
+        {% block user_comment %}{% endblock %}
+    </div>
+    <button class="button_answer_comment">
+        Ответить
+    </button>
 </div>
 {% endblock %}
