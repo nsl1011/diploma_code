@@ -1,4 +1,6 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
+import pymysql
+from datetime import datetime
 # import sentry_sdk
 # from sentry_sdk.integrations.flask import FlaskIntegration
 
@@ -13,6 +15,43 @@ from flask import Flask, render_template, url_for
 
 app = Flask (__name__)
 
+
+def db_connect():
+    connect = pymysql.connect(
+        host="pari2020.beget.tech",
+        user="pari2020_comment",
+        password="Q12345!",
+        database="pari2020_comment",
+        cursorclass=pymysql.cursors.DictCursor
+    )
+    return connect
+
+# connect = db_connect()
+# with connect.cursor() as cursor:
+#     cursor.execute("""INSERT INTO `comment` (`name`) value(%s)""", (5,))
+#     cursor.execute("""DELETE FROM `comment`""")
+
+def add_comment(comment):
+    try:
+        connect = db_connect()
+        with connect.cursor() as cursor:
+            cursor.execute("""INSERT INTO `comment` (`comment`) value(%s)""", (comment,))
+    except Exception as error:
+        print(f"error_add_comment {error}")
+    finally:
+        connect.commit()
+        connect.close()
+
+
+@app.route('/form_send', methods=["GET"])
+def form_send():
+    if request.method == "GET":
+        data = request.args.get('comment_send','')
+        if(len(data) > 0):
+            add_comment(data)
+    return redirect('/munfunction_battery_not_hold_charge')
+
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -24,4 +63,4 @@ def munfunction_battery_not_hold_charge():
 
 
 if __name__ == "__main__":
-    app.run(debug=True) #поставить false
+    app.run(debug=True) #поставить false, чтобы не было ошибокы

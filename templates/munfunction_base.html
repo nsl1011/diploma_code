@@ -36,9 +36,11 @@
 </div>
 <div class="block_comment">
     <div class="block_comment_send">
-        <textarea type="text" placeholder="Оставьте комментарий..." class="comment_send_text"></textarea>
-        <br>
-        <button class="comment_send_button">Отправить</button>
+        <form action="/form_send">
+            <textarea minlength="1" name="comment_send" type="text" placeholder="Оставьте комментарий..." class="comment_send_text"></textarea>
+            <br>
+            <button class="comment_send_button" onclick="submit">Отправить</button>
+        </form>
     </div>
 </div>
 <div class="block_comment_info">
