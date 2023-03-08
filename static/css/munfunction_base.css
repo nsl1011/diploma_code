@@ -151,8 +151,12 @@
     color: rgba(0, 0, 0, 0.5)
 }
 
-.block_user_comment {
+.block_comments {
     width: 1000px;
+    margin: 30px auto;
+}
+
+.block_user_comment {
     margin: 30px auto;
 }
 
@@ -180,7 +184,7 @@
 }
 
 .user_comment {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .button_answer_comment {

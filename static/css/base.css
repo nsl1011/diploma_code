@@ -19,14 +19,15 @@ header {
 }
 
 footer {
-    margin-top: 100px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
     padding: 50px 50px;
     border: solid black;
     background-color: black;
     color: #EAEEED;
-    text-align: left;
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, 47%);
 }
 
 .container {
@@ -97,6 +98,6 @@ footer {
 }
 
 .email  {
-    text-align: right;
+    margin-left: auto;
     font-size: 150%;
 }
