@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Навесное оборудование
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/attachments.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="block_attachments">
+    <div class="attachments_title">
+        Выберите неисправность из навесного оборудования
+    </div>
+    <div class="line"></div>
+    <div class="attachments_list">
+        {% for m in data %}
+        <div class="attachments_malfunction">
+            <form action="/form_show_page_attachments" method="get">
+                <input name="id" value="{{ m.id }}" style="display: none;" />
+                <button onclick="submit" class="button_choice_malfunction_attachments" name="malfunction_title">
+                    {{ m.title }}
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="line"></div>
+</div>
+{% endblock %}

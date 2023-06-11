@@ -1,0 +1,50 @@
+.block_survey {
+    width: 500px;
+    margin: 20px auto;
+}
+
+.question_survey {
+    font-size: 150%;
+    text-align: center;
+}
+
+.line {
+    border-bottom: 2px solid #000;
+    margin: 10px auto;
+}
+
+.survey {
+    justify-items: left;
+}
+
+.choice {
+    font-size: 140%;
+}
+
+.input_survey {
+    appearance: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    transition: 0.2s all linear;
+    outline: none;
+    position: relative;
+    top: 4px;
+}
+
+.input_survey:checked {
+    border: 6px solid black;
+}
+
+.button_next {
+    float: right;
+    font-family: 'Courier new';
+    font-size: 150%;
+    border: none;
+    cursor: pointer;
+}
+
+.button_next:hover {
+    opacity: 0.6;
+}

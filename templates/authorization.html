@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Главная страница
+Авторизация
 {% endblock %}
 
 {% block link %}
@@ -9,5 +9,27 @@
 {% endblock %}
 
 {% block body %}
-ergter
+<div class="block_authorization">
+    <div class="name_authorization">
+        Вход
+    </div>
+    <div class="enter_data">
+        <div class="enter_mail">
+            <input class="mail_input" placeholder="Введите логин">
+            <div class="line"></div>
+        </div>
+        <div class="enter_password">
+            password
+            <div class="line"></div>
+        </div>
+    </div>
+    <div class="login_buttons">
+        <div class="button_login">
+            <button>Войти</button>
+        </div>
+        <div class="button_registration">
+            <button>Зарегестрироваться</button>
+        </div>
+    </div>
+</div>
 {% endblock %}

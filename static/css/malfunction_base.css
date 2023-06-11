@@ -1,38 +1,15 @@
-.block_other_buttons {
-    padding: 1em;
-    display: grid;
-    width: auto;
-    grid-template-columns: repeat(3, 33%);
-    justify-items: center;
-}
 
-.other_buttons {
-    font-size: 150%;
-}
-
-.other_buttons_animation {
-    border: 1px solid black;
-    border-radius: 40px;
-    padding: 10px 30px;
-    transition: 0.3s;
-}
-
-.other_buttons_animation:hover {
-    border: 1px solid gray;
-    color: gray;
-}
-
-.munfunction_label {
+.malfunction_label {
     font-size: 150%;
     color: rgba(0,0,0,0.5)
 }
 
-.block_munfunction {
+.block_malfunction {
     width: 1000px;
     margin: 30px auto;
 }
 
-.munfunction_head {
+.malfunction_head {
     display: grid;
     grid-template-columns: repeat(3, 33%);
     justify-items: center;
@@ -51,11 +28,10 @@
     position: relative;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
-    transition: 0.3s;
 }
 
 .flag_favorite:hover {
-    background-color: #d6cf00;
+    opacity: 0.6;
 }
 
 .button_mark {
@@ -71,14 +47,13 @@
     position: relative;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
-    transition: 0.3s;
 }
 
 .flag_mark:hover {
-    background-color: #bf0000;
+    opacity: 0.7;
 }
 
-.munfunction_name {
+.malfunction_name {
     font-size: 150%;
     text-align: center;
     white-space: nowrap;
@@ -89,7 +64,7 @@
     margin: 10px auto;
 }
 
-.munfunction_description {
+.malfunction_description {
     text-align: justify;
 }
 
@@ -126,12 +101,10 @@
     color: #EAEEED;
     background-color: #3870C6;
     border: solid 2px #3870C6;
-    transition: 0.3s;
 }
 
 .comment_send_button:hover {
-    background-color: #EAEEED;
-    color: #3870C6;
+    background-color: #0080FF;
 }
 
 .block_comment_info {
@@ -187,7 +160,7 @@
     margin-top: 10px;
 }
 
-.button_answer_comment {
+.button_delete_comment {
     border: none;
     font-family: 'Courier new';
     cursor: pointer;
@@ -195,7 +168,6 @@
     white-space: nowrap;
     color: rgba(0, 0, 0, 0.5);
     font-size: 90%;
-    transition: 0.3s;
 }
 
 .button_answer_comment:hover {

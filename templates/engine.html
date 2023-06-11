@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Двигатель
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/engine.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="block_engine">
+    <div class="engine_title">
+        Выберите неисправность из неисправностей двигателя
+    </div>
+    <div class="line"></div>
+    <div class="engine_list">
+        {% for m in data %}
+        <div class="engine_malfunction">
+            <form action="/form_show_page_engine" method="get">
+                <input name="id" value="{{ m.id }}" style="display: none;" />
+                <button onclick="submit" class="button_choice_malfunction_engine" name="malfunction_title">
+                    {{ m.title }}
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="line"></div>
+</div>
+{% endblock %}

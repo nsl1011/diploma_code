@@ -1,0 +1,47 @@
+.block_authorization {
+    border: 1px solid red;
+    width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.name_authorization {
+    font-size: 200%;
+}
+
+.enter_data {
+    text-align: left;
+}
+
+.enter_mail {
+    margin-top: 20px;
+}
+
+.mail_input {
+    border: none;
+    background-color: #EAEEED;
+}
+
+input::placeholder {
+    font-weight: bold;
+    opacity: 0.5;
+    color: black;
+}
+
+.enter_password {
+    margin-top: 10px;
+    border: 1px solid red;
+}
+
+.line {
+    border-bottom: 1px solid #000;
+    margin: 5px auto;
+}
+
+.login_buttons {
+    margin-top: 20px;
+}
+
+.button_login {
+
+}

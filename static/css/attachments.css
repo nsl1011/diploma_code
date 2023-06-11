@@ -1,0 +1,36 @@
+.block_attachments {
+    width: 1000px;
+    margin: 30px auto;
+}
+
+.attachments_title {
+    font-size: 150%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.line {
+    border-bottom: 2px solid #000;
+    margin: 10px auto;
+}
+
+.attachments_list {
+
+}
+
+.attachments_malfunction {
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+}
+
+.button_choice_malfunction_attachments {
+    border: none;
+    cursor: pointer;
+    font-family: 'Courier new';
+    font-size: 130%;
+}
+
+.button_choice_malfunction_attachments:hover {
+    opacity: 0.6;
+}

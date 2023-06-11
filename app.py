@@ -1,9 +1,12 @@
-from flask import Flask, render_template, url_for, request, redirect # Импортируем библиотеки
-import pymysql
-from datetime import datetime
+# https://horo.beget.com/phpMyAdmin/index.php?db=pari2020_comment - ссылка на БД
+
+from flask import Flask, render_template, url_for, request, redirect, session # Импорт библиотек
+from db import DB # Импорт класса DB из файла db.py
+from survey import SURVEY # Импорт класса SURVEY из файла survey.py
+from datetime import datetime # Импортир даты и времени
+
 # import sentry_sdk
 # from sentry_sdk.integrations.flask import FlaskIntegration
-
 # sentry_sdk.init(
 #     dsn="https://edf95c656a5644c08e7f95753ede281a@o4504514952101888.ingest.sentry.io/4504514955313152",
 #     integrations=[
@@ -13,75 +16,116 @@ from datetime import datetime
 #     traces_sample_rate=1.0
 # )
 
-app = Flask (__name__) # Создаем экземпляр приложения и присваиваем ему переменную __name__, которая содержит имя текущего файла python
+db_worker = DB() # Присваивание переменной класс DB
+survey_worker = SURVEY() # Присваивание переменной класс SURVEY
+app = Flask (__name__) # Создание экземпляра приложения и присваивание ему переменную __name__, которая содержит имя текущего файла python
+app.secret_key = 'my_secret_key' # Для работы с session
 
 
-def db_connect(): # Функция для подключения к БД
-    connect = pymysql.connect(
-        host = "pari2020.beget.tech",
-        user = "pari2020_comment",
-        password = "Q12345!",
-        database = "pari2020_comment",
-        cursorclass = pymysql.cursors.DictCursor # ?
-    )
-    return connect
-    
+@app.route('/malfunction_base') # Обработка страницы malfunction_base
+def malfunction_base(): # Функция для обработки страницы malfunction_base
+    id = session.get('page_id', None) # Получение page_id
+    comments = db_worker.show_comments(id) # Вызов функции show_comments (вывод комментариев, которые привязаны к определенной странице)
+    comment_count = len(comments) # Количество комментариев на странице
+    if comment_count == 0: # Условие: если на странице нет комментариев, то значение = 0
+        comment_count = 0
+    page = db_worker.show_page(id) # Вызов функции show_page (показ страницы)
+    return render_template("malfunction_base.html", page = page, comment_count = comment_count, comments = comments) # Возвращение страницы со всеми переменными
 
-def add_comment(comment): # Функция добавления комментария в БД
-    try:
-        connect = db_connect() # Подключение к БД
-        with connect.cursor() as cursor:
-            cursor.execute("""INSERT INTO `comment` (`comment`) value(%s)""", (comment,)) # Добавление в БД комментария
-    except Exception as error:
-        print(f"error_add_comment {error}") # Вывод ошибок
-    finally: # Выполнить в любом случае, даже с ошибками
-        connect.commit() # Сохранить данные в БД
-        connect.close() # Закрыть БД
 
 @app.route('/form_send', methods=["GET"]) # Ссылка на form_send
 def form_send(): # Функция для получения комментария
-    if request.method == "GET":
-        data = request.args.get('comment_send','')
-        if(len(data) > 0): # Условие, чтобы комментарий не был пустой
-            add_comment(data) # Добавляем комментарий в БД
-    return redirect('/munfunction_battery_not_hold_charge')
+    if request.method == "GET": # Условие: если запрос метода GET
+        data = request.args.get('comment_send','') # Получение комментария с фронта в переменную data
+        page_id = session.get('page_id', None) # Получение page_id
+        if (len(data) > 0): # Условие, чтобы комментарий не был пустой
+            db_worker.add_comment(data, page_id) # Добавляем комментарий в БД
+    return redirect('/malfunction_base') # Возвращение обновленной страницы
 
 
-def show_comment():
-    try:
-        connect = db_connect() # Подключение к БД
-        with connect.cursor() as cursor: 
-            cursor.execute("""SELECT * FROM `comment`""")
-            data = cursor.fetchall()
-    except Exception as error:
-        print(f"error_add_comment {error}") # Вывод ошибок
-    finally: # Выполнить в любом случае, даже с ошибками
-        connect.commit() # Сохранить данные в БД
-        connect.close() # Закрыть БД
-    return data
+@app.route('/form_delete', methods=["GET"]) # Ссылка на form_delete
+def form_delete(): # Функция для удаления комментария
+    if request.method == "GET": # Условие: если запрос метода GET
+        data = request.args.get('comment_delete','') # Получение комментария с фронта в переменную data
+        id = request.args.get('id','') # Получение id с фронта в переменную id
+        db_worker.delete_comment(id) # Вызов функции delete_comment (удаление комментария)
+    return redirect('/malfunction_base') # Возвращение обновленной страницы
 
 
-@app.route('/')
-def index():
-    return render_template("index.html")
-
-ч
-@app.route('/authorization')
-def authorization():
-    return render_template("authorization.html")
+@app.route('/') # Обработка главной страницы
+def index(): # Функция для обработки главной страницы
+    data = db_worker.show_intresting_story()
+    return render_template("index.html", data = data) # Возвращение главной страницы
 
 
-@app.route('/munfunction_battery_not_hold_charge')
-def munfunction_battery_not_hold_charge():
-    # comments = { 
-    #         'nickname': 'dod',
-    #         'date': '21.05.2022 в 09:22',
-    #         'comment': 'кто тебя звал????'
-    #     }
-    #comments = [{'id': 4, 'user_name': 'YYsdfgfiu', 'comment': 'aqw', 'datetime': datetime(2023, 3, 4, 10, 42, 51)}, {'id': 5, 'user_name': '', 'comment': 'ferfre', 'datetime': datetime(2023, 3, 4, 11, 1, 49)}]
-    comments = show_comment()
-    comment_count = len(comments)
-    return render_template("munfunction_battery_not_hold_charge.html", comment_count = comment_count, comments = comments)
+@app.route('/authorization') # Обработка страницы авторизации
+def authorization(): # Функция для обработки страницы авторизации
+    return render_template("authorization.html") # Возвращение страницы авторизации
+
+
+@app.route('/attachments') # Обработка страницы со списком неисправностей в навесном оборудовании
+def attachments(): # Функция для обработки страницы со списком неисправностей в навесном оборудовании
+    if request.method == "GET": # Условие: если запрос метода GET
+        place = 'Навесное оборудование' # Присваивание переменной параметра для вывода списка страниц неисправностей именно для навесного оборудования (place)
+        data = db_worker.show_list_malfunction(place) # Вызов функции show_attachments (вывод неисправностей навесного оборудования)
+        return render_template("attachments.html", data = data) # Возвращение страницы со всеми переменными
+
+
+@app.route('/form_show_page_attachments', methods=["GET"]) # Ссылка на form_show_page_attachments
+def form_show_page_attachments(): # Функция для показа страницы после выбора неисправности из навесного оборудования
+    if request.method == "GET": # Условие: если запрос метода GET
+        id = request.args.get('id') # Получение id с фронта в переменную id
+        session['page_id'] = id # Присваивание id к сессии с page_id
+        page = db_worker.show_page(id) # Вызов функции show_page (показ страницы)
+        comments = db_worker.show_comments(id) # Вызов функции show_comments (вывод комментариев, которые привязаны к определенной странице)
+        comment_count = len(comments) # Количество комментариев на странице
+    return render_template("malfunction_base.html", page = page, comments = comments, comment_count = comment_count) # Возвращение страницы со всеми переменными
+
+
+@app.route('/engine') # Обработка страницы со списком неисправностей в двигателе
+def engine(): # Функция для обработки страницы со списком неисправностей в двигателе
+    if request.method == "GET": # Условие: если запрос метода GET
+        place = 'Двигатель' # Присваивание переменной параметра для вывода списка страниц неисправностей именно для двигателя (place)
+        data = db_worker.show_list_malfunction(place) # Вызов функции show_attachments (вывод неисправностей навесного оборудования)
+        return render_template("engine.html", data = data) # Возвращение страницы со всеми переменными
+
+
+@app.route('/form_show_page_engine', methods=["GET"]) # Ссылка на form_show_page_engine
+def form_show_page_engine(): # Функция для показа страницы после выбора неисправности из навесного оборудования
+    if request.method == "GET": # Условие: если запрос метода GET
+        id = request.args.get('id') # Получение id с фронта в переменную id
+        session['page_id'] = id # Присваивание id к сессии с page_id
+        page = db_worker.show_page(id) # Вызов функции show_page (показ страницы)
+        comments = db_worker.show_comments(id) # Вызов функции show_comments (вывод комментариев, которые привязаны к определенной странице)
+        comment_count = len(comments) # Количество комментариев на странице
+    return render_template("malfunction_base.html", page = page, comments = comments, comment_count = comment_count) # Возвращение страницы со всеми переменными
+
+
+@app.route('/survey') # Обработка страницы опросника
+def survey_start(): # Функция для обработки страницы опросниками со стартовым вопросом
+    data = survey_worker.survey_yes_no() # Вызов функции show_survey1 (вопрос и ответы (1))
+    return render_template("survey.html", data = data) # Возвращение страницы со всеми переменными
+
+
+@app.route('/form_survey', methods=["GET"]) # Ссылка на form_survey
+def survey_vote(): # Функция для обработки ответов в опроснике
+    vote = request.args.get('answer') # Получение ответа на вопрос с фронта в переменную vote
+    if request.method == "GET": # Условие: если запрос метода GET
+        if vote == 'Запускается':
+            data = survey_worker.survey_yes_1()
+            return render_template("survey.html", data = data)
+        if vote == 'Устойчиво':
+            data = survey_worker.survey_yes_2()
+            return render_template("survey.html", data = data)
+        if vote == 'Не устойчиво':
+            id = 13
+            page = db_worker.show_page(id) # не работает
+            comments = db_worker.show_comments(id)
+            comment_count = len(comments)
+            return render_template("malfunction_base.html", page = page, comments = comments, comment_count = comment_count)
+        elif vote == 'Двигатель':
+            data = survey_worker.survey_2()
+            return render_template("survey.html", data = data)
 
 
 if __name__ == "__main__": # Условия для точки входа (если запускаем этот файл, то функция app.run выполняется)

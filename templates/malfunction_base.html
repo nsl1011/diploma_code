@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Аккумулятор плохо держит заряд
+{% endblock %}
+
+{% block link %}
+<link rel='stylesheet' href="{{ url_for('static', filename='css/malfunction_base.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="block_malfunction">
+    {% for p in page %}
+    <div class="malfunction_head">
+        <button class="button_favorite">
+            <div class="flag_favorite"></div>
+        </button>
+        <div class="malfunction_name">
+            {{ p.title }}
+        </div>
+        <button class="button_mark">
+            <div class="flag_mark"></div>
+        </button>
+    </div>
+    <div class="line"></div>
+    <div class="malfunction_description">
+        {{ p.description }}
+    </div>
+    <div class="line"></div>
+    {% endfor %}
+</div>
+<div class="block_comment">
+    <div class="block_comment_send">
+        <form action="/form_send">
+            <textarea minlength="1" name="comment_send" type="text" placeholder="Оставьте комментарий..." class="comment_send_text"></textarea>
+            <br>
+            <button class="comment_send_button" onclick="submit">Отправить</button>
+        </form>
+    </div>
+</div>
+<div class="block_comment_info">
+    <div class="comment_name">
+        Комментарии
+    </div>
+    <div class="comment_number">
+        {{ comment_count }}
+    </div>
+</div>
+<div class="block_comments">
+    {% for c in comments %}
+    <div class="block_user_comment">
+        <div class="user_info">
+            <img src="/static/other_pictures/cloud.png" class="user_photo">
+            <div class="user_name">
+                {{ c.user_name }}
+            <br>
+            <div class="user_date">
+                Опубликовано {{ c.datetime }}
+            </div>
+            </div>
+        </div>
+        <div class="user_comment">
+            {{ c.comment }}
+        </div>
+        <form action="/form_delete" method="get">
+            <input name="id" value={{c.id}} style="display: none;"/>
+            <button onclick="submit" class="button_delete_comment" name="comment_delete">
+                Удалить
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Опрос
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/survey.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="block_survey">
+    <div class="question_survey">
+        {{ data.question }}
+    </div>
+    <form action="/form_survey">
+        <div class="line"></div>
+        <div class="survey">
+            {% for answer in data.answer %}
+            <div class="choice">
+                <input type="radio" id="contactChoice1" name="answer" value="{{ answer }}" class="input_survey"> {{ answer }} <br>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="line"></div>
+        <input type="submit" value="Далее" class="button_next">
+    </form>
+</div>
+{% endblock %}

@@ -3,8 +3,9 @@
     margin: 0;
 }
 
-html {
+html, body {
     background-color: #EAEEED;
+    height: 100%;
 }
 
 a {
@@ -19,19 +20,24 @@ header {
 }
 
 footer {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    padding: 50px 50px;
+    display: flex;
+    flex: 0 0 auto;
+    margin-top: 100px;
+    padding: 50px 0px;
     border: solid black;
     background-color: black;
     color: #EAEEED;
-    display: grid;
-    grid-template-columns: repeat(2, 47%);
 }
 
 .container {
     font-family: 'Courier new';
+    min-height: 100%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.main {
+    flex: 1 1 auto;
 }
 
 .header_style {
@@ -52,7 +58,7 @@ footer {
     padding: 20px;
     display: grid;
     width: auto;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(3, 33%);
     justify-items: center;
     font-size: 200%;
 }
@@ -84,20 +90,22 @@ footer {
     transform-origin: right;
 }
 
-.block_label {
-    font-size: 250%;
+.block_label_footer {
+    font-size: 200%;
+    margin-left: 30px;
 }
 
-.label {
+.label_footer {
     border: solid #EAEEED;
     display: inline-block;
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: -15px;
+    margin-right: -15px;
     background-color: #EAEEED;
     color: black;
 }
 
 .email  {
     margin-left: auto;
-    font-size: 150%;
+    font-size: 120%;
+    margin-right: 30px;
 }
