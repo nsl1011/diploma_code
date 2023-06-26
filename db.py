@@ -107,3 +107,62 @@ class DB:
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
         return data
+
+
+    def check_password(self, login, password):
+        try:
+            connect = self.db_connect() # Подключение к БД
+            with connect.cursor() as cursor:
+                cursor.execute("""SELECT user_password FROM `users` WHERE user_name=%s""", (login)) # Получение информации о пользователе по логину
+                user_password = cursor.fetchall()
+                if str(user_password[0]['user_password']) == str(password):
+                    return True
+                return False
+        except Exception as error:
+            print(f"error_show_page {error}") # Вывод ошибок
+            return False
+        finally: # Выполнить в любом случае, даже с ошибками
+            connect.commit() # Сохранить данные в БД
+            connect.close() # Закрыть БД
+
+
+    def show_profile(self, login): # Функция показа интересных историй на главной странице
+        try:
+            connect = self.db_connect() # Подключение к БД
+            with connect.cursor() as cursor:
+                cursor.execute("""SELECT * FROM `users` WHERE user_name=%s""", (login)) # Получение страниц с интересными историями
+                data = cursor.fetchall()
+        except Exception as error:
+            print(f"error_show_page {error}") # Вывод ошибок
+        finally: # Выполнить в любом случае, даже с ошибками
+            connect.commit() # Сохранить данные в БД
+            connect.close() # Закрыть БД
+        return data
+
+
+    def add_user(self, login, password): # Функция добавления пользователя в БД
+        try:
+            connect = self.db_connect() # Подключение к БД
+            with connect.cursor() as cursor:
+                cursor.execute("""INSERT INTO `users` (`user_name`, `user_password`) value(%s, %s)""", (login, password)) # Добавление в БД пользователя
+        except Exception as error:
+            print(f"error_add_comment {error}") # Вывод ошибок
+        finally: # Выполнить в любом случае, даже с ошибками
+            connect.commit() # Сохранить данные в БД
+            connect.close() # Закрыть БД
+
+
+    def check_user(self, login): # Функция проверки наличия пользователя в БД
+        try:
+            connect = self.db_connect() # Подключение к БД
+            with connect.cursor() as cursor:
+                if cursor.execute("""SELECT user_name FROM `users` WHERE user_name=%s""", (login)): # Проверка наличия пользователя
+                    return True
+                else:
+                    return False
+        except Exception as error:
+            print(f"error_show_page {error}") # Вывод ошибок
+            return False
+        finally: # Выполнить в любом случае, даже с ошибками
+            connect.commit() # Сохранить данные в БД
+            connect.close() # Закрыть БД

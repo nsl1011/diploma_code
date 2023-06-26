@@ -7,7 +7,7 @@ input::placeholder {
     color: black;
 }
 
-.block_authorization {
+.block_registration {
     width: 500px;
     margin: 20px auto;
     text-align: center;
@@ -24,7 +24,7 @@ input::placeholder {
     font-weight: bold;
 }
 
-.name_authorization {
+.name_registration {
     font-size: 200%;
 }
 
@@ -49,6 +49,10 @@ input::placeholder {
     margin-top: 10px;
 }
 
+.enter_password_omt {
+    margin-top: 10px;
+}
+
 .password_input {
     width: 500px;
     margin-top: 10px;
@@ -67,32 +71,7 @@ input::placeholder {
     margin-top: 40px;
 }
 
-.button_login {
-    
-}
-
-.input_login {
-    font-family: 'Courier new';
-    font-size: 150%;
-    cursor: pointer;
-    border-radius: 100px;
-    border: 2px solid #000;
-    background-color: #EAEEED;
-    padding: 2px 215px;
-    transition: 0.5s;
-}
-
-.input_login:hover {
-    background-color: #000;
-    color: #EAEEED;
-}
-
-.button_registration {
-    
-}
-
 .input_registration {
-    margin-top: 20px;
     font-family: 'Courier new';
     font-size: 150%;
     cursor: pointer;
@@ -104,6 +83,23 @@ input::placeholder {
 }
 
 .input_registration:hover {
+    background-color: #000;
+    color: #EAEEED;
+}
+
+.input_authorization {
+    margin-top: 20px;
+    font-family: 'Courier new';
+    font-size: 150%;
+    cursor: pointer;
+    border-radius: 100px;
+    border: 2px solid #000;
+    background-color: #EAEEED;
+    padding: 2px 151px;
+    transition: 0.5s;
+}
+
+.input_authorization:hover {
     background-color: #000;
     color: #EAEEED;
 }

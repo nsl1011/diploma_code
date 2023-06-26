@@ -33,20 +33,32 @@ footer {
     font-family: 'Courier new';
     min-height: 100%;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+}
+
+.main_label {
+    margin-left: 100px;
 }
 
 .main {
     flex: 1 1 auto;
 }
 
-.header_style {
+.en_style {
     border: solid black;
     display: inline-block;
     margin-left: -20px;
     margin-right: -20px;
     background-color: black;
     color: #EAEEED;
+}
+
+.user_label {
+    float: right;
+    margin-right: 50px;
+    padding-top: 5.5px;
+    width: 50px;
+    height: 50px;
 }
 
 .header_line {

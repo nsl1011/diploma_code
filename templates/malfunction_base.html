@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Аккумулятор плохо держит заряд
+{% for p in page %}
+    {{ p.title }}
+{% endfor %}
 {% endblock %}
 
 {% block link %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="block_profile">
+    <div class="name_profile">
+        Профиль
+    </div>
+    <div class="data_profile">
+        <div class="user_photo">
+            <img src="/static/other_pictures/cloud.png" class="data_user_photo">
+        </div>
+        {% for u in data_profile %}
+        <div class="user_name">
+            <div class="data_label_name">
+                Имя пользователя
+            </div>
+            <div class="data_user_name">
+                {{ u.user_name }}
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="user_status">
+            <div class="data_label_status">
+                Статус пользователя
+            </div>
+            <div class="data_user_status">
+                {{ u.user_status }}
+            </div>
+        </div>
+        <div class="line"></div>
+        {% endfor %}
+        <form action="/form_logout">
+            <input name="button_logout" type="submit" value="Выйти из профиля" class="input_logout">
+        </form>
+    </div>
+</div>
+{% endblock %}

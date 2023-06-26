@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Авторизация
+Регистрация
 {% endblock %}
 
 {% block link %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/authorization.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="block_authorization">
+<div class="block_registration">
     {% for msg in get_flashed_messages() %}
     <div class="flash">
         {{ msg }}
     </div>
     {% endfor %}
-    <div class="name_authorization">
-        Авторизация
+    <div class="name_registration">
+        Регистрация
     </div>
-    <form action="/form_login">
+    <form action="/form_registration">
         <div class="enter_data">
             <div class="enter_login">
                 <input name="user_login" class="mail_input" placeholder="Введите логин">
@@ -28,13 +28,17 @@
                 <input name="user_password" type="password" class="password_input" placeholder="Введите пароль">
                 <div class="line"></div>
             </div>
+            <div class="enter_password_omt">
+                <input name="user_password_omt" type="password" class="password_input" placeholder="Введите пароль повторно">
+                <div class="line"></div>
+            </div>
         </div>
         <div class="login_buttons">
-            <div class="button_login">
-                <input name="button_login" type="submit" value="Войти" class="input_login">
-            </div>
             <div class="button_registration">
                 <input name="button_registration" type="submit" value="Зарегистрироваться" class="input_registration">
+            </div>
+            <div class="button_authorization">
+                <input name="button_authorization" type="submit" value="Авторизоваться" class="input_authorization">
             </div>
         </div>
     </form>
