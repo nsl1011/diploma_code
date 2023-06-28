@@ -10,6 +10,11 @@
 
 {% block body %}
 <div class="block_profile">
+    {% for msg in get_flashed_messages() %}
+    <div class="flash">
+        Пароль изменен
+    </div>
+    {% endfor %}
     <div class="name_profile">
         Профиль
     </div>
@@ -37,6 +42,9 @@
         </div>
         <div class="line"></div>
         {% endfor %}
+        <form action="/form_button_change_password">
+            <input name="button_change_password" type="submit" value="Сменить пароль" class="input_change_password">
+        </form>
         <form action="/form_logout">
             <input name="button_logout" type="submit" value="Выйти из профиля" class="input_logout">
         </form>

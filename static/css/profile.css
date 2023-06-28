@@ -4,6 +4,17 @@
     text-align: center;
 }
 
+.flash {
+    height: 40px;
+    width: 400px;
+    padding-top: 15px;
+    margin: 30px auto;
+    background-color: green;
+    border-radius: 30px;
+    font-size: 150%;
+    font-weight: bold;
+}
+
 .name_profile {
     font-size: 200%;
 }
@@ -63,6 +74,23 @@
     font-size: 120%;
     border: none;
     background-color: #EAEEED;
+}
+
+.input_change_password {
+    margin-top: 20px;
+    font-family: 'Courier new';
+    font-size: 150%;
+    cursor: pointer;
+    border-radius: 100px;
+    border: 2px solid #000;
+    background-color: #EAEEED;
+    padding: 2px 148px;
+    transition: 0.5s;
+}
+
+.input_change_password:hover {
+    background-color: #000;
+    color: #EAEEED;
 }
 
 .input_logout {

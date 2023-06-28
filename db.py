@@ -12,7 +12,7 @@ class DB:
         )
         except Exception as connect_error:
             print(f"Connect error: {connect_error}")
-        return connect
+        return connect # Вернуть connect
         
 
     def add_comment(self, comment, page_id): # Функция добавления комментария в БД
@@ -38,7 +38,7 @@ class DB:
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
-        return data
+        return data # Вернуть data
 
 
     def delete_comment(self, id): # Функция удаления комментария в БД
@@ -57,67 +57,67 @@ class DB:
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""SELECT * FROM `pages` WHERE id=%s""", (id)) # Получение страницы, получить название
+                cursor.execute("""SELECT * FROM `pages` WHERE id=%s""", (id)) # Получение страницы из БД
                 data = cursor.fetchall()
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
-        return data
+        return data # Вернуть data
 
 
-    def show_page_malfunction(self, title): # Функция показа страницы
+    def show_page_malfunction(self, title): # Функция показа страницы неисправности
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""SELECT * FROM `pages` WHERE title=%s""", (title)) # Получение страницы, получить название
+                cursor.execute("""SELECT * FROM `pages` WHERE title=%s""", (title)) # Получение страницы из БД
                 data = cursor.fetchall()
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
-        return data
+        return data # Вернуть data
 
 
     def show_list_malfunction(self, place): # Функция показа неисправностей навесного оборудования и двигателя
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""SELECT * FROM `pages` WHERE place=%s""", (place)) # Получение страниц с неисправностями по навесному оборудованию
+                cursor.execute("""SELECT * FROM `pages` WHERE place=%s""", (place)) # Получение страниц с неисправностями по навесному оборудованию и двигателю
                 data = cursor.fetchall()
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
-        return data
+        return data # Вернуть data
 
 
-    def show_intresting_story(self): # Функция показа интересных историй на главной странице
+    def show_intresting_story(self): # Функция показа историй на главной странице
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""SELECT * FROM `intresting_stories` ORDER BY RAND() LIMIT 1""") # Получение страниц с интересными историями
+                cursor.execute("""SELECT * FROM `intresting_stories` ORDER BY RAND() LIMIT 1""") # Получение страниц с историями
                 data = cursor.fetchall()
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
-        return data
+        return data # Вернуть data
 
 
-    def check_password(self, login, password):
+    def check_password(self, login, password): # Функция сверки пароля
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""SELECT user_password FROM `users` WHERE user_name=%s""", (login)) # Получение информации о пользователе по логину
+                cursor.execute("""SELECT user_password FROM `users` WHERE user_name=%s""", (login)) # Получение пароля о пользователе по логину
                 user_password = cursor.fetchall()
-                if str(user_password[0]['user_password']) == str(password):
-                    return True
-                return False
+                if str(user_password[0]['user_password']) == str(password): # Если пароли совпадают
+                    return True # Вернуть True
+                return False # Вернуть False
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
             return False
@@ -126,25 +126,25 @@ class DB:
             connect.close() # Закрыть БД
 
 
-    def show_profile(self, login): # Функция показа интересных историй на главной странице
+    def show_profile(self, login): # Функция получения информации о пользователе
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""SELECT * FROM `users` WHERE user_name=%s""", (login)) # Получение страниц с интересными историями
+                cursor.execute("""SELECT * FROM `users` WHERE user_name=%s""", (login)) # Получение информации о пользователе
                 data = cursor.fetchall()
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
-        return data
+        return data # Вернуть data
 
 
-    def add_user(self, login, password): # Функция добавления пользователя в БД
+    def add_user(self, login, password, key_word): # Функция добавления пользователя в БД
         try:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
-                cursor.execute("""INSERT INTO `users` (`user_name`, `user_password`) value(%s, %s)""", (login, password)) # Добавление в БД пользователя
+                cursor.execute("""INSERT INTO `users` (`user_name`, `user_password`, `key_word`) value(%s, %s, %s)""", (login, password, key_word)) # Добавление пользователя в БД
         except Exception as error:
             print(f"error_add_comment {error}") # Вывод ошибок
         finally: # Выполнить в любом случае, даже с ошибками
@@ -157,12 +157,42 @@ class DB:
             connect = self.db_connect() # Подключение к БД
             with connect.cursor() as cursor:
                 if cursor.execute("""SELECT user_name FROM `users` WHERE user_name=%s""", (login)): # Проверка наличия пользователя
-                    return True
+                    return True  # Вернуть True
                 else:
-                    return False
+                    return False # Вернуть False
         except Exception as error:
             print(f"error_show_page {error}") # Вывод ошибок
-            return False
+            return False # Вернуть False
+        finally: # Выполнить в любом случае, даже с ошибками
+            connect.commit() # Сохранить данные в БД
+            connect.close() # Закрыть БД
+
+
+    def check_key_word(self, login, key_word): # Функция проверки кодового слова
+        try:
+            connect = self.db_connect() # Подключение к БД
+            with connect.cursor() as cursor:
+                cursor.execute("""SELECT key_word FROM `users` WHERE user_name=%s""", (login)) # Получение кодового слова
+                user_key_word = cursor.fetchall()
+                if str(user_key_word[0]['key_word']) == str(key_word): # ЕСли кодовое слово совпадает
+                    return True # Вернуть True
+                return False # Вернуть False
+        except Exception as error:
+            print(f"error_show_page {error}") # Вывод ошибок
+            return False # Вернуть False
+        finally: # Выполнить в любом случае, даже с ошибками
+            connect.commit() # Сохранить данные в БД
+            connect.close() # Закрыть БД
+
+
+    def change_password(self, login, new_password): # Функция смены пароя
+        try:
+            connect = self.db_connect() # Подключение к БД
+            with connect.cursor() as cursor:
+                cursor.execute("""UPDATE `users` SET user_password=%s WHERE user_name=%s""", (new_password, login)) # Обновление пароля пользователя
+        except Exception as error:
+            print(f"error_show_page {error}") # Вывод ошибок
+            return False # Вернуть False
         finally: # Выполнить в любом случае, даже с ошибками
             connect.commit() # Сохранить данные в БД
             connect.close() # Закрыть БД
