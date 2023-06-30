@@ -12,6 +12,11 @@
 
 {% block body %}
 <div class="block_malfunction">
+    {% for msg in get_flashed_messages() %}
+    <div class="flash">
+        {{ msg }}
+    </div>
+    {% endfor %}
     {% for p in page %}
     <div class="malfunction_head">
         <button class="button_favorite">
